@@ -122,8 +122,8 @@ export type Group = { name: string; revenue: number; profit: number; orders: num
 export function groupRows(rows: Row[], field: Column | "month"): Group[] {
   const groups = new Map<string, { name: string; revenue: number; profit: number; ids: Set<string> }>();
   for (const row of rows) {
-    const key = field === "month" ? row.date.slice(0, 7) : row[field];
-    const name = field === "Product_ID" ? row.Product_Name : key;
+    const key = field === "month" ? row.date.slice(0, 7) : field === "Product_ID" ? row.Product_Name : row[field];
+    const name = key;
     const group = groups.get(key) ?? { name, revenue: 0, profit: 0, ids: new Set<string>() };
     const metrics = rowMetrics(row);
     group.revenue += metrics.revenue;
