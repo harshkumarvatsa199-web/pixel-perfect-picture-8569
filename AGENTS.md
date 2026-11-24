@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Keep spreadsheet data in a root React context for the current browser session; navigation must preserve active data and filters without sending datasets to a server.
+- Centralize parsing, validation, filtering, and financial calculations in a browser-safe pure analytics module so every chart and insight uses the same formulas.
+- Parse CSV with Papa Parse and Excel with SheetJS, preserving formatted identifiers and raw monetary values; activate a replacement only after all records pass validation and the user confirms.
+- Use separate TanStack content routes for the dashboard, upload, insights, and future analyst, with shared navigation and unique page metadata.
